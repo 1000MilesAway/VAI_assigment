@@ -74,6 +74,15 @@ def search_product():
     return jsonify({'products': [product.serialize for product in products]})
 
 
+@app.route('/product/sort', methods=['GET'])
+def get_sorted():
+    sort_key = request.args.get('key')
+    product = Product.query.order_by(sort_key).all()
+    if product is None:
+        abort(404)
+    return jsonify({'product': product.serialize})
+
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

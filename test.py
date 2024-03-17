@@ -23,10 +23,14 @@ class Testing(unittest.TestCase):
         assert resp.status_code == 200
         
     def test_4_search(self): 
-        resp = requests.get(f"{url}/search?name=Product&description=product'", headers=headers)
+        resp = requests.get(f"{url}/search?name=Product&description=product", headers=headers)
+        assert resp.status_code == 200
+        
+    def test_5_sort(self):
+        resp = requests.get(f"{url}/sort?key={'name'}", headers=headers)
         assert resp.status_code == 200
 
-    def test_5_delete(self): 
+    def test_6_delete(self): 
         resp = requests.delete(f"{url}/1", headers=headers)
         assert resp.status_code == 200
     
